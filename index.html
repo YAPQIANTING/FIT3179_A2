@@ -1,65 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Labour Force</title>
-    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+    <script src="vega_lite_vis.js"></script>
+    
+    <title>Choropleth Map</title>
 </head>
+
 <body>
-    <div id="vis"></div>
-
-    <script type="text/javascript">
-        // Load the topoJSON file
-        const topoJSONUrl = 'ne_110m.json'; 
-        
-        // Load the income data
-        const labourForceDataUrl = 'labour_force_data.csv';
-
-        // Visualization spec
-        const vlSpec = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 800,
-            "height": 600,
-            "data": {
-                "url": topoJSONUrl,
-                "format": {"type": "topojson", "feature": "states"}
-            },
-            "transform": [
-                {
-                    "lookup": "properties.name",
-                    "from": {
-                        "data": {
-                            "url": labourForceDataUrl,
-                            "format": {"type": "json"}
-                        },
-                        "key": "state",
-                        "fields": ["income_mean"]
-                    }
-                }
-            ],
-            "mark": {
-                "type": "geoshape",
-                "stroke": "black",
-                "strokeWidth": 0.5
-            },
-            "encoding": {
-                "color": {
-                    "field": "income_mean",
-                    "type": "quantitative",
-                    "scale": {"scheme": "blues"}
-                },
-                "tooltip": [
-                    {"field": "properties.name", "type": "nominal", "title": "State"},
-                    {"field": "income_mean", "type": "quantitative", "title": "Mean Income"}
-                ]
-            }
-        };
-
-        // Embed the Vega-Lite visualization into the div
-        vegaEmbed('#vis', vlSpec);
-    </script>
+    <h1>Choropleth Map</h1>
+    <div id="choropleth_map"></div>
 </body>
+
 </html>
