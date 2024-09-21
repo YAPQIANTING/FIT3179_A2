@@ -5,7 +5,7 @@
     "height": 400,
     "projection": {"type": "equalEarth"},
     "data": {
-      "url": "https://github.com/YAPQIANTING/FIT3179_A2/blob/main/ne_110m_admin_0_countries.topojson",
+      "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/ne_110m_admin_0_countries.topojson",
       "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
     },
     "transform": [
@@ -13,7 +13,7 @@
         "lookup": "properties.NAME",
         "from": {
           "data": {
-            "url": "https://github.com/YAPQIANTING/FIT3179_A2/blob/main/labour_force_data.csv",
+            "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/labour_force_data.csv",
             "format": {"type": "csv"}
           },
           "key": "Country Name",
@@ -24,7 +24,7 @@
     "mark": {"type": "geoshape"},
     "encoding": {
       "color": {
-        "field": "Labour Force Total 2023",
+        "field": "Year",
         "type": "quantitative",
         "scale": {
           "type": "threshold",
@@ -34,7 +34,7 @@
       },
       "tooltip": [
         {"field": "properties.NAME", "type": "nominal", "title": "Country Name"},
-        {"field": "Year", "type": "quantitative"}
+        {"field": "Year", "type": "quantitative", "title": "Labour Force"}
       ]
     }
   }
