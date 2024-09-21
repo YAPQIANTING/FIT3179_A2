@@ -27,13 +27,13 @@
         "field": "Year",
         "type": "quantitative",
         "scale": {
-          "type": "threshold",
-          "domain": [100000, 10000000, 500000000],
-          "range": ["#fdbe85", "#fd8d3c", "#e6550d", "#a63603"]
+            "type": "threshold",
+            "domain": [100000, 1000000, 10000000, 50000000, 100000000, 500000000, 1000000000, 1500000000],
+            "range": ["#f7fbff", "#c6dbef", "#9ecae1", "#6baed6", "#3182bd", "#08519c", "#08306b", "#041f3f"]
         }
       },
       "tooltip": [
-        {"field": "properties.NAME", "type": "nominal", "title": "Country Name"},
+        {"field": "properties.NAME", "type": "nominal", "title": "Country"},
         {"field": "Year", "type": "quantitative", "title": "Labour Force"}
       ]
     }
