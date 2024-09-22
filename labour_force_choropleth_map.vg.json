@@ -1,34 +1,51 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Labour Force as % of Population (2023)",
+  "title": "Global Labour Force in 2023",
   "width": 800,
   "height": 400,
-  "projection": {
-    "type": "equalEarth"
-  },
+  "projection": {"type": "equalEarth"},
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/ne_110m.topojson",
-        "format": {"type": "topojson", "feature": "ne_110m"}
+        "sphere": true
       },
-      "mark": {"type": "geoshape", "fill": "#D6EAF8", "stroke": "white"}
+      "mark": {
+        "type": "geoshape",
+        "fill": "#cceeff"
+      }
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/labour_force_data.csv",
-        "format": {"type": "csv"}
+        "graticule": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "lightgray",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/ne_110m_admin_0_countries.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
       "transform": [
         {
-          "calculate": "datum['Measure'] / datum['Population'] * 100",
-          "as": "Labor Force % of Population"
+          "lookup": "properties.NAME",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/labour_force_data.csv",
+              "format": {"type": "csv"}
+            },
+            "key": "Country Name",
+            "fields": ["Percentage"]
+          }
         }
       ],
       "mark": {"type": "geoshape"},
       "encoding": {
         "color": {
-          "field": "Labor Force % of Population",
+          "field": "Percentage",
           "type": "quantitative",
           "scale": {
             "type": "linear",
@@ -37,25 +54,9 @@
           }
         },
         "tooltip": [
-          {"field": "Country Name", "type": "nominal", "title": "Country"},
-          {
-            "field": "Labor Force % of Population",
-            "type": "quantitative",
-            "title": "Labour Force (% of Population)"
-          }
+          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+          {"field": "Percentage", "type": "quantitative", "title": "Labour Force (%)"}
         ]
-      }
-    },
-    {
-      "data": {
-        "graticule": true
-      },
-      "mark": {"type": "geoshape", "stroke": "lightgray", "strokeWidth": 0.5}
-    },
-    {
-      "mark": {"type": "geoshape", "fill": "#cceeff"},
-      "data": {
-        "sphere": true
       }
     }
   ]
