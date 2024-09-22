@@ -6,7 +6,7 @@
     "projection": {"type": "equalEarth"},
     "data": {
       "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/ne_110m.topojson",
-      "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      "format": {"type": "topojson", "feature": "ne_110m"}
     },
     "transform": [
       {
