@@ -3,15 +3,12 @@
   "title": "Global Labour Force in 2023",
   "width": 800,
   "height": 400,
+  "background": "#d0e3f2",
   "projection": {"type": "mercator"},
   "layer": [
     {
       "data": {"graticule": true},
-      "mark": {
-        "type": "geoshape",
-        "stroke": "lightgray",
-        "strokeWidth": 0.5
-      }
+      "mark": {"type": "geoshape", "stroke": "lightgray", "strokeWidth": 0.5}
     },
     {
       "data": {

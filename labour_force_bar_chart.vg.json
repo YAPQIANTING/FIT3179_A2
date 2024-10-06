@@ -1,0 +1,65 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 400,
+    "title": "Labor Force Percentage by Country (2023)",
+    "data": {
+      "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/labour_force_data.csv",
+      "format": {"type": "csv"}
+    },
+    "transform": [
+      {
+        "filter": "isValid(datum['Percentage'])"
+      }
+    ],
+    "selection": {
+      "percentageSelect": {
+        "type": "single",
+        "fields": ["Percentage"],
+        "bind": {
+          "input": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "name": "Select Max Percentage: "
+        }
+      }
+    },
+    "mark": "bar",
+    "encoding": {
+      "x": {
+        "field": "Country Name",
+        "type": "nominal",
+        "title": "Country",
+        "sort": "x"
+      },
+      "y": {
+        "field": "Percentage",
+        "type": "quantitative",
+        "title": "Labor Force Percentage"
+      },
+      "color": {
+        "field": "Percentage",
+        "type": "quantitative",
+        "scale": {
+          "domain": [0, 100],
+          "range": ["#f7fbff", "#08519c"]
+        },
+        "legend": {"title": "Labor Force Percentage"}
+      },
+      "tooltip": [
+        {"field": "Country Name", "type": "nominal", "title": "Country: "},
+        {
+          "field": "Percentage",
+          "type": "quantitative",
+          "title": "Labor Force %: "
+        }
+      ]
+    },
+    "transform": [
+      {
+        "filter": "datum['Percentage'] <= percentageSelect['Percentage']"
+      }
+    ]
+}
+  
