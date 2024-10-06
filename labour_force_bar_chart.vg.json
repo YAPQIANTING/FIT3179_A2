@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 600,
-    "height": 600,
-    "title": "Labor Force Percentage by Country (2023)",
+    "width": 700,
+    "height": 400,
+    "title": "Labor Force Percentage by Country in 2023",
     "data": {
       "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/labour_force_data.csv",
       "format": {"type": "csv"}
