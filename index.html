@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+    <script src="vega_lite_vis.js"></script>
+</head>
+
+<body>
+
+    <div class="title-container">
+        <h1>Global Labor Force Insights</h1>
+    </div>
+    <br>
+
+    <div class="map-container">
+        <h3>Labour Force Participation Rate By Country</h3>
+        <div id="choropleth_map"></div>
+    </div>
+    <br>
+
+    <div class="stacked-bar-container">
+        <h3>Labour Force Participation Rate Trends By Continent</h3>
+        <div class="stacked-bar-chart-container">
+            <div id="stacked_bar_chart"></div>
+            <div class="side-analysis-text">
+                <p>
+                    From the stacked bar chart, it is obvious to say that <span style="color:#91bfdb; font-weight:bold;">Asia</span> and <span style="color:#fee08b; font-weight:bold;">Europe</span> consistently have the highest rates, followed by <span style="color:#fdae61; font-weight:bold;">Africa</span> and the <span style="color:#4575b4; font-weight:bold;">Americas</span>. A notable observation is the relative stability across all continents over the years, indicating consistent workforce engagement globally.
+                </p>
+                <br>
+                <p>
+                    However, subtle fluctuations, particularly a dip in <strong>2020</strong>, could suggest the impact of significant global events like the <strong>COVID-19 pandemic</strong> on labor markets. This trend allows us to compare workforce dynamics and understand how different regions responded to economic shifts.
+                </p>
+            </div>
+        </div>
+    </div>
+    <br>
+    
+    <div class="trellis-container">
+        <h3>Labor Force Growth By Continent</h3>
+        <div class="chart-container">
+            <div id="trellis_area_chart"></div>
+            <div class="center-analysis-text">
+                <p>
+                    <span style="color:#91bfdb; font-weight:bold;">Asia</span> shows a steady increase in its labor force, leading globally, while <span style="color:#fdae61; font-weight:bold;">Africa</span> also demonstrates notable growth, potentially indicating expanding employment opportunities and economic activity. On the other hand, the <span style="color:#4575b4; font-weight:bold;">Americas</span>, <span style="color:#fee08b; font-weight:bold;">Europe</span>, and <span style="color:#d73027; font-weight:bold;">Oceania</span> show more modest growth, with <span style="color:#d73027; font-weight:bold;">Oceania</span> remaining relatively flat, reflecting its smaller population.
+                </p>
+                <br>
+                <p>
+                    The contrasting rates of growth provide insight into the economic development of these regions, with <span style="color:#fdae61; font-weight:bold;">Africa</span> and <span style="color:#91bfdb; font-weight:bold;">Asia</span> leading in terms of labor force expansion. The flat trend in <span style="color:#d73027; font-weight:bold;">Oceania</span> highlights its comparatively smaller contribution to the global labor pool.
+                </p>
+            </div>
+        </div>
+    </div>
+    <br>
+    
+    <div class="bump-container">
+        <h3>Unemployment Rate Shifts By Continent</h3>
+        <div class="bump-chart-container">
+            <div id="bump_chart"></div>
+            <div class="side-analysis-text">
+                <p>
+                    <span style="color:#d73027; font-weight:bold;">Oceania</span> consistently ranks first in having the lowest unemployment rates, while the <span style="color:#4575b4; font-weight:bold;">Americas</span> fluctuate and eventually rank highest post-<strong>2020</strong>.
+                </p>
+                <br>
+                <p>
+                    <span style="color:#91bfdb; font-weight:bold;">Asia</span> and <span style="color:#fee08b; font-weight:bold;">Europe</span> swap ranks a few times, showing some variability in their relative positions, while <span style="color:#fdae61; font-weight:bold;">Africa</span> remains relatively stable, maintaining a mid-range unemployment rate rank.
+                </p>
+                <br>
+                <p>
+                    The year <strong>2020</strong> has drastically affected unemployment rates, likely due to the global pandemic.
+                </p>
+            </div>
+        </div>
+    </div>
+    <br>
+      
+    <div class="bump-container">
+        <h3>Working Poverty Rate Shifts By Continent</h3>
+        <div class="bump-chart-container">
+            <div id="bump_chart2"></div>
+            <div class="side-analysis-text">
+                <p>
+                    In <strong>2017</strong>, <span style="color:#91bfdb;"><strong>Asia</strong></span> sharply rose from 3rd to 1st in working poverty, indicating worsening conditions. Since then, <span style="color:#91bfdb;"><strong>Asia</strong></span> has maintained the highest poverty rate. Meanwhile, <span style="color:#fdae61;"><strong>Africa</strong></span> dropped from 1st to 2nd, suggesting slight improvement compared to <span style="color:#91bfdb;"><strong>Asia</strong></span>. 
+                    <span style="color:#fee08b;"><strong>Europe</strong></span> and the <span style="color:#4575b4;"><strong>Americas</strong></span> remained stable, with <span style="color:#fee08b;"><strong>Europe</strong></span> consistently having the lowest rate and the <span style="color:#4575b4;"><strong>Americas</strong></span> fluctuating between 2nd and 3rd.
+                </p>
+                <br>
+                <p>
+                    <strong>2017 marked a key shift</strong>: <span style="color:#91bfdb;"><strong>Asia's poverty worsened</strong></span>, while <span style="color:#fdae61;"><strong>Africa improved slightly</strong></span>, with <span style="color:#fee08b;"><strong>Europe</strong></span> and <span style="color:#4575b4;"><strong>the Americas</strong></span> maintaining stable rates.
+                </p>               
+
+            </div>
+        </div>
+    </div>
+    <br>
+    
+    <div class="metadata-container">
+        <div class="center-analysis-text">
+            <p><strong>Created By:</strong> Yap Qian Ting (32846231)</p>
+            <p><strong>Updated By:</strong> 15/10/2024</p>
+            <br>
+
+            <p><strong>Dataset Sources:</strong></p>
+            <a href="https://databank.worldbank.org/source/health-nutrition-and-population-statistics#" target="_blank">World Bank Group</a>
+            <br>
+            <a href="https://rshiny.ilo.org/dataexplorer38/?lang=en&id=SDG_0111_SEX_AGE_RT_A" target="_blank">ILOSTAT explorer</a>
+        </div>
+    </div>
+    <br>    
+
+</body>
+
+</html>

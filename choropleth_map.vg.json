@@ -1,0 +1,142 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "vconcat": [
+    {
+      "width": 900,
+      "height": 400,
+      "title": "Labour Force Participation Rate by Country",
+      "data": {
+        "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/datas/country_labour_force_data.csv",
+        "format": {"type": "csv"}
+      },
+      "projection": {"type": "equalEarth"},
+      "layer": [
+        {
+          "data": {"sphere": true},
+          "mark": {"type": "geoshape", "fill": "#97d5ef88", "stroke": null}
+        },
+        {
+          "data": {"graticule": true},
+          "mark": {"type": "geoshape", "stroke": "gray", "strokeWidth": 0.5}
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/ne_110m_admin_0_countries.topojson",
+            "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+          },
+          "transform": [
+            {
+              "calculate": "'Data is not available in ' + datum.properties.NAME",
+              "as": "Note"
+            }
+          ],
+          "mark": {"type": "geoshape", "fill": "#e0e0e0", "stroke": "lightgray"},
+          "encoding": {
+            "tooltip": [
+              {"field": "Note"}
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/ne_110m_admin_0_countries.topojson",
+            "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+          },
+          "transform": [
+            {
+              "lookup": "properties.NAME",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/datas/country_labour_force_data.csv",
+                  "format": {"type": "csv"}
+                },
+                "key": "Country Name",
+                "fields": ["Year", "Normalized Labour Force"],
+                "as": ["Year", "Normalized Labour Force"]
+              }
+            }
+          ],
+          "params": [
+            {
+              "name": "country_select",
+              "select": {"type": "point", "fields": ["properties.NAME"]}
+            }
+          ],
+          "mark": {"type": "geoshape"},
+          "encoding": {
+            "color": {
+              "field": "Normalized Labour Force",
+              "type": "quantitative",
+              "scale": {
+                "type": "threshold",
+                "domain": [0, 20, 40, 60, 80, 100],
+              "range": [
+                  "#90e0ef",
+                  "#48cae4",
+                  "#00b4d8",
+                  "#0096c7",
+                  "#0077b6",
+                  "#023e8a",
+                  "#03045e"
+              ]
+              },
+              "legend": {
+                "title": "Labour Force (%)",
+                "orient": "right",
+                "titleFontSize": 12,
+                "labelFontSize": 12
+              }
+            },
+            "tooltip": [
+              {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+              {"field": "Year", "type": "nominal", "title": "Year"},
+              {
+                "field": "Normalized Labour Force",
+                "type": "quantitative",
+                "title": "Labour Force (%)",
+                "format": ".2f"
+              }
+            ],
+            "opacity": {
+              "condition": [
+                {"param": "country_select", "value": 1}              
+              ],
+              "value": 0.3
+            }
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/ne_110m_admin_0_countries.topojson",
+            "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+          },
+          "transform": [
+            {"filter": {"field": "properties.NAME", "oneOf": ["China", "Malaysia", "Australia", "Brazil", "United States", "Canada"]}},
+            {"calculate": "datum.properties.NAME", "as": "countryName"},
+            {
+              "calculate": "datum.properties.NAME === 'China' ? 104.1954 : datum.properties.NAME === 'Malaysia' ? 101.9758 : datum.properties.NAME === 'Australia' ? 133.7751 : datum.properties.NAME === 'Brazil' ? -51.9253 : datum.properties.NAME === 'United States' ? -95.7129 : datum.properties.NAME === 'Canada' ? -106.3468 : null",
+              "as": "longitude"
+            },
+            {
+              "calculate": "datum.properties.NAME === 'China' ? 35.8617 : datum.properties.NAME === 'Malaysia' ? 4.2105 : datum.properties.NAME === 'Australia' ? -25.2744 : datum.properties.NAME === 'Brazil' ? -14.2350 : datum.properties.NAME === 'United States' ? 37.0902 : datum.properties.NAME === 'Canada' ? 56.1304 : null",
+              "as": "latitude"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "center",
+            "dx": 1,
+            "dy": -5,
+            "fontSize": 10,
+            "color": "black"
+          },
+          "encoding": {
+            "longitude": {"field": "longitude"},
+            "latitude": {"field": "latitude"},
+            "text": {"field": "countryName"}          
+          }
+        }
+      ]
+    }
+  ]
+}

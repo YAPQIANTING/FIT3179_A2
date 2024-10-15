@@ -1,0 +1,128 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Unemployment Rate Ranking by Continent",
+  "width": "600",
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/datas/continent_data.csv",
+    "format": { "type": "csv" }
+  },
+  "params": [
+    {
+      "name": "continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Africa",
+          "Asia",
+          "Europe",
+          "Americas",
+          "Oceania"
+        ],
+        "labels": [
+          "Show All",
+          "Africa",
+          "Asia",
+          "Europe",
+          "Americas",
+          "Oceania"
+        ],
+        "name": "Continent: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "window": [
+        { "op": "rank", "as": "Rank" }
+      ],
+      "sort": [
+        { "field": "Unemployment Rate", "order": "descending" }
+      ],
+      "groupby": ["Year"]
+    },
+    {
+      "filter": "continent_selection == null || datum.Continent == continent_selection"
+    }
+  ],
+  "layer": [
+    {
+      "selection": {
+        "continent_highlight": {
+          "type": "multi",
+          "fields": ["Continent"],
+          "bind": "legend"
+        }
+      },
+      "mark": {
+        "type": "line",
+        "point": {
+          "size": 100,
+          "filled": true
+        },
+        "interpolate": "monotone",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal",
+          "title": "Year"
+        },
+        "y": {
+          "field": "Rank",
+          "type": "quantitative",
+          "scale": {
+            "reverse": true,
+            "domain": [0, 6]
+          },
+          "title": "Unemployment Rate Rank",
+          "axis": {
+            "grid": false
+          }
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": "Continent",
+          "scale": {
+            "domain": [
+              "Africa", "Asia", "Europe", "Americas", "Oceania"
+            ],
+            "range": [
+              "#fdae61", "#91bfdb", "#fee08b", "#4575b4", "#d73027"
+            ]
+          }
+        },
+        "opacity": {
+          "condition": [
+            {"selection": "continent_highlight", "value": 1}
+          ],
+          "value": 0.3
+        },
+        "tooltip": [
+          { "field": "Year", "type": "temporal", "title": "Year", "format": "%Y" },
+          { "field": "Continent", "type": "nominal", "title": "Continent" },
+          { "field": "Unemployment Rate", "type": "quantitative", "title": "Unemployment Rate (%)", "format": ".2f" },
+          { "field": "Rank", "type": "quantitative", "title": "Rank" }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 12,
+        "dx": 90,
+        "dy": -130
+      },
+      "encoding": {
+        "text": {
+          "value": "Significant change due to pandemic in 2020"
+        }
+      }
+    }
+  ]
+}

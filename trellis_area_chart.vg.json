@@ -1,0 +1,113 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Labour Force by Continent",
+      "anchor": "middle",
+      "align": "center"
+    },
+    "data": {
+      "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/datas/continent_data.csv",
+      "format": {"type": "csv"}
+    },
+    "vconcat": [
+      {
+        "facet": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": "Continent"
+        },
+        "spec": {
+          "width": 170,
+          "height": 200,
+          "mark": {
+            "type": "area",
+            "interpolate": "monotone"
+          },
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "temporal",
+              "title": "Year",
+              "axis": {
+                "format": "%Y",
+                "tickCount": 10,
+                "grid": false
+              },
+              "scale": {
+                "domain": {
+                  "selection": "time_brush", 
+                  "fields": ["Year"]
+                }
+              }
+            },
+            "y": {
+              "field": "Labour Force",
+              "type": "quantitative",
+              "title": "Labour Force"
+            },
+            "color": {
+              "field": "Continent",
+              "type": "nominal",
+              "legend": null,
+              "scale": {
+                "domain": [
+                  "Africa", "Asia", "Europe", "Americas", "Oceania"
+                ],
+                "range": [
+                  "#fdae61", "#91bfdb", "#fee08b", "#4575b4", "#d73027"
+                ]
+              }
+            },
+            "tooltip": [
+              {"field": "Year", "type": "temporal", "title": "Year"},
+              {"field": "Labour Force", "type": "quantitative", "title": "Labour Force", "format": ".0f"},
+              {"field": "Continent", "type": "nominal", "title": "Continent"}
+            ]
+          }
+        }
+      },
+      {
+        "width": 937,
+        "height": 100,
+        "title": "Use this line chart to filter data by year",
+        "data": {
+          "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/datas/world_labour_force_data.csv",
+          "format": {"type": "csv"}
+        },
+        "mark": "line",
+        "params": [
+          {
+            "name": "time_brush",
+            "select": {
+              "type": "interval",
+              "encodings": ["x"]
+            }
+          }
+        ],
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "temporal",
+            "title": "Year",
+            "axis": {
+              "format": "%Y",
+              "grid": false
+            }
+          },
+          "y": {
+            "field": "Labour Force",
+            "type": "quantitative",
+            "title": "World Labour Force"
+          },
+          "color": {
+            "value": "#1b2631"
+          },
+          "tooltip": [
+            {"field": "Year", "type": "temporal", "title": "Year"},
+            {"field": "Labour Force", "type": "quantitative", "title": "Labour Force", "format": ".0f"}
+          ]
+        }
+      }
+    ]
+  }
+  

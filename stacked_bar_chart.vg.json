@@ -1,0 +1,87 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Labour Force Participation Rate by Continent",
+    "width": 600,
+    "height": 350,
+    "params": [
+      {
+        "name": "continent_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Africa",
+            "Asia",
+            "Europe",
+            "Americas",
+            "Oceania"
+          ],
+          "labels": [
+            "Show All",
+            "Africa",
+            "Asia",
+            "Europe",
+            "Americas",
+            "Oceania"
+          ],
+          "name": "Continent: "
+        }
+      }
+    ],
+    "data": {
+      "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/datas/continent_data.csv",
+      "format": {"type": "csv"}
+    },
+    "transform": [
+      {
+        "filter": "continent_selection == null || datum.Continent == continent_selection"
+      }
+    ],
+    "selection": {
+      "continent_highlight": {
+        "type": "multi",
+        "fields": ["Continent"],
+        "bind": "legend"
+      }
+    },
+    "mark": "bar",
+    "encoding": {
+      "x": {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Year",
+        "axis": {"labelAngle": 0},
+        "scale": {"padding": 0.1}
+      },
+      "y": {
+        "field": "Normalized Labour Force",
+        "type": "quantitative",
+        "title": "Labour Force Participation Rate"
+      },
+      "color": {
+        "field": "Continent",
+        "type": "nominal",
+        "title": "Continent",
+        "scale": {
+          "domain": ["Africa", "Asia", "Europe", "Americas", "Oceania"],
+          "range": ["#fdae61", "#91bfdb", "#fee08b", "#4575b4", "#d73027"]
+        },
+        "legend": {"orient": "right"}
+      },
+      "opacity": {
+        "condition": {"selection": "continent_highlight", "value": 1},
+        "value": 0.3
+      },
+      "tooltip": [
+        {"field": "Year", "type": "ordinal", "title": "Year"},
+        {"field": "Continent", "type": "nominal", "title": "Continent"},
+        {
+          "field": "Normalized Labour Force",
+          "type": "quantitative",
+          "format": ".2f",
+          "title": "Labour Force (%)"
+        }
+      ]
+    }
+  }
+  
