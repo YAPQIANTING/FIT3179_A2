@@ -6,7 +6,7 @@
       "align": "center"
     },
     "data": {
-      "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179-A2/main/datas/continent_data.csv",
+      "url": "https://raw.githubusercontent.com/YAPQIANTING/FIT3179_A2/main/continent_data.csv",
       "format": {"type": "csv"}
     },
     "vconcat": [
